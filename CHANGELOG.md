@@ -3,8 +3,9 @@
 ## Unreleased
 
 ### Fixed
-- [#935](https://github.com/Shopify/shopify_api/pull/935) Fix issue [#931](https://github.com/Shopify/shopify_api/pull/931), weight of variant should be float
-- [#939](https://github.com/Shopify/shopify_api/pull/939) Hotfix for `.spin.dev` JWT validation.
+- [#935](https://github.com/Shopify/shopify_api/pull/935) Fix issue [#931](https://github.com/Shopify/shopify_api/issues/931), weight of variant should be float
+- [#939](https://github.com/Shopify/shopify_api/pull/939) Hotfix for `.spin.dev` JWT validation
+- [#941](https://github.com/Shopify/shopify_api/pull/941) Fix `to_hash` to return readonly attributes, unless being used for serialize the object for saving - fix issue [#930](https://github.com/Shopify/shopify_api/issues/930)
 
 ## Version 10.0.2
 

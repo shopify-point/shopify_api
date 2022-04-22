@@ -261,8 +261,8 @@ module ShopifyAPI
         match.nil? ? true : super
       end
 
-      sig { returns(T::Hash[String, T.untyped]) }
-      def to_hash
+      sig { params(saving: T::Boolean).returns(T::Hash[String, T.untyped]) }
+      def to_hash(saving = false)
         hash = {}
         instance_variables.each do |var|
           next if [
@@ -273,7 +273,7 @@ module ShopifyAPI
             :"@errors",
             :"@aliased_properties",
           ].include?(var)
-          next if self.class.read_only_attributes&.include?(var)
+          next if saving && self.class.read_only_attributes&.include?(var)
 
           var = var.to_s.delete("@")
           attribute = if @aliased_properties.value?(var)
@@ -313,7 +313,7 @@ module ShopifyAPI
 
       sig { params(update_object: T::Boolean).void }
       def save(update_object: false)
-        hash = HashDiff::Comparison.new(original_state, to_hash).left_diff
+        hash = HashDiff::Comparison.new(original_state, to_hash(true)).left_diff
         method = hash[self.class.primary_key] ? :put : :post
 
         path = self.class.get_path(http_method: method, operation: method, entity: self)
